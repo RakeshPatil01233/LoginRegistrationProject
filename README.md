@@ -59,8 +59,9 @@ Request Body
   "password": "12345"
 }
 Response
-
 User Registered Successfully!
+
+
 2️⃣ Login User
 Endpoint
 
@@ -88,10 +89,12 @@ CORS configuration for frontend communication
 ## ▶️ How to Run the Project
 1️⃣ Clone the repository
 git clone https://github.com/your-username/your-repository-name.git
+
 2️⃣ Open project in IDE
 IntelliJ IDEA
 Spring Tool Suite (STS)
 Eclipse
+
 3️⃣ Configure Database
 Update application.properties
 
@@ -100,6 +103,7 @@ spring.datasource.username=root
 spring.datasource.password=your_password
 
 spring.jpa.hibernate.ddl-auto=update
+
 4️⃣ Run the Application
 Run:
 
