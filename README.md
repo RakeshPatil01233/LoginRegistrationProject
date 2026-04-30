@@ -1,37 +1,52 @@
-# 🔐 Spring Boot Login & Registration API
-This project is a simple Login and Registration backend API built using Spring Boot, Spring Security, and JPA. It allows users to register with email and password and then login using the same credentials.
+# 🔐 Spring Boot Login & Registration API (JWT Secured)
 
-Passwords are securely stored using BCrypt password hashing.
+This project is a backend authentication system built using **Spring Boot, Spring Security, JPA, and JWT**.  
+It allows users to register, login, and access protected APIs using token-based authentication.
+
+Passwords are securely stored using **BCrypt hashing**, and APIs are secured using **JWT (JSON Web Token)**.
+
+---
 
 ## 🚀 Features
-User Registration API
-User Login API
-Password encryption using BCrypt
-Spring Security configuration
-RESTful APIs
-MySQL / JPA database integration
-CORS configuration for frontend connection
+
+- User Registration API
+- User Login API (returns JWT token)
+- Password encryption using BCrypt
+- JWT-based Authentication
+- Protected REST APIs
+- Spring Security integration
+- MySQL / JPA database integration
+- CORS configuration for frontend
+
+---
 
 ## 🛠️ Technologies Used
-Java
-Spring Boot
-Spring Security
-Spring Data JPA
-Hibernate
-MySQL (or any JPA supported database)
-Maven
 
+- Java
+- Spring Boot
+- Spring Security
+- Spring Data JPA
+- Hibernate
+- MySQL
+- JWT (io.jsonwebtoken)
+- Maven
+
+---
 
 ## 📂 Project Structure
-src/main/java/com/login/demo
+
+```
+src/main/java/com/example/FirstApi
 │
 ├── config
-│   └── SecurityConfig.java
+│   ├── SecurityConfig.java
+│   ├── JwtUtil.java
+│   └── JwtFilter.java
 │
 ├── controller
 │   └── AuthController.java
 │
-├── DTO
+├── dto
 │   ├── LoginRequest.java
 │   └── RegisterRequest.java
 │
@@ -45,75 +60,137 @@ src/main/java/com/login/demo
 │   └── AuthService.java
 │
 └── LoginandRegistrationApplication.java
-
+```
 
 ## ⚙️ API Endpoints
-1️⃣ Register User
-Endpoint
 
-POST /auth/register
-Request Body
+### 1️⃣ Register User
 
+**POST** `/auth/register`
+
+**Request Body:**
+```json
 {
   "email": "user@example.com",
   "password": "12345"
 }
-Response
+```
+**Response:**
+```
 User Registered Successfully!
+```
+---
 
+### 2️⃣ Login User
 
-2️⃣ Login User
-Endpoint
+**POST** `/auth/login`
 
-POST /auth/login
-Request Body
-
+**Request Body:**
+```json
 {
   "email": "user@example.com",
   "password": "12345"
 }
-Response
+```
 
-Login Successful!
-If password is incorrect:
+**Response:**
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiJ9..."
+}
+```
 
-Invalid Password!
+---
+
+### 3️⃣ Protected API
+
+**GET** `/auth/api/test`
+
+**Headers:**
+```
+Authorization: Bearer <JWT_TOKEN>
+```
+
+**Response:**
+```
+You are authenticated!
+```
+
+---
 
 ## 🔐 Security
+
 This project uses:
 
-BCryptPasswordEncoder to hash passwords
-Spring Security Filter Chain
-CORS configuration for frontend communication
+- BCryptPasswordEncoder → secure password hashing  
+- JWT Token → stateless authentication  
+- JwtFilter → validates token on every request  
+- Spring Security Filter Chain → protects APIs  
+
+---
 
 ## ▶️ How to Run the Project
-1️⃣ Clone the repository
+
+### 1️⃣ Clone the repository
+
+```bash
 git clone https://github.com/your-username/your-repository-name.git
+```
 
-2️⃣ Open project in IDE
-IntelliJ IDEA
-Spring Tool Suite (STS)
-Eclipse
+---
 
-3️⃣ Configure Database
-Update application.properties
+### 2️⃣ Open in IDE
 
+- IntelliJ IDEA  
+- Eclipse  
+- Spring Tool Suite (STS)  
+
+---
+
+### 3️⃣ Configure Database
+
+Update `application.properties`:
+
+```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/sakila
 spring.datasource.username=root
 spring.datasource.password=your_password
 
 spring.jpa.hibernate.ddl-auto=update
+```
 
-4️⃣ Run the Application
+---
+
+### 4️⃣ Run the Application
+
 Run:
 
+```
 LoginandRegistrationApplication.java
-Spring Boot will start on:
+```
 
+Server starts at:
+
+```
 http://localhost:8080
+```
+
+---
+
 ## 📌 Future Improvements
-JWT Authentication
-Role based authorization
-Email verification
-Password reset feature
-Refresh tokens
+
+- Role-based authorization (USER / ADMIN)
+- Refresh token implementation
+- Email verification
+- Password reset feature
+- Frontend integration (React)
+
+---
+
+## 💡 Key Learning
+
+- Implemented JWT Authentication in Spring Boot  
+- Integrated Spring Security with custom filter  
+- Built stateless authentication system  
+- Secured REST APIs using token-based approach 
+
